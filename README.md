@@ -17,6 +17,7 @@ conda env create -m Algiers-HNO -f requirements.yaml
 **Install node_modules**
 
 ```bash
+cd client
 npm install
 ```
 

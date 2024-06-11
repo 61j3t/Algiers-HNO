@@ -62,12 +62,6 @@ class Solver:
 
         return "GOAL IS UNREACHABLE!"
 
-    def solution(self, node):
-        path = []
-        while node:
-            path.insert(0, node)
-            node = node.parent
-        return path
 
     def hill_climbing_search(self, max_iterations=1000, step_size=0.1):
         # Initialize random starting point
@@ -90,3 +84,10 @@ class Solver:
                 current_value = new_value
 
         return self.solution(current_node)
+
+    def solution(self, node):
+        path = []
+        while node:
+            path.insert(0, node)
+            node = node.parent
+        return path

@@ -27,14 +27,13 @@ def solve():
 
     location = data.get("location")
     algorithm = data.get("algorithm")
+    type = data.get("type")
     department = data.get("department")
-    print("EEEEEEEEEEEEEEEEEEEEEEE")
-    print(location, algorithm, department)
 
     Y, X = ox.geocoder.geocode(location)
 
     initial_state = ox.distance.nearest_nodes(graph, X, Y, return_dist=False)
-    goal_state = {"type": "public", "department": department}
+    goal_state = {"type": type, "department": department}
     problem = Problem(initial_state, goal_state)
     solver = Solver(problem)
 
@@ -42,18 +41,10 @@ def solve():
         solution_path = solver.hill_climbing_search()
     else:
         solution_path = solver.general_search(strategy=algorithm)
-    print("========================================================================")
-    print(solution_path)
-    print("========================================================================")
-    print([i.state for i in solution_path])
-    print("========================================================================")
-    print(type(str(solution_path[0].state)))
-    print("========================================================================")
-    print(nodes["392972565"])
-    print("========================================================================")
 
     path = [
-        [nodes[str(node.state)]["y"], nodes[str(node.state)]["x"]] for node in solution_path
+        [nodes[str(node.state)]["y"], nodes[str(node.state)]["x"]]
+        for node in solution_path
     ]
 
     return jsonify({"path": path})

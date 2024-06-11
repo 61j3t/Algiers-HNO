@@ -16,8 +16,8 @@ Y, X = ox.geocoder.geocode("Sidi Abdellah")
 initial_state = ox.distance.nearest_nodes(graph, X, Y, return_dist=False)
 problem = Problem(initial_state, goal_state={"type": "public", "department": "Anatomical Pathology"})
 solver = Solver(problem)
-# solution_path = solver.general_search(strategy="BFS")
-solution_path = solver.hill_climbing_search()
+solution_path = solver.general_search(strategy="A* Search")
+# solution_path = solver.hill_climbing_search()
 
 states = []
 for node in solution_path:

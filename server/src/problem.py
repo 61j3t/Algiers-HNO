@@ -74,7 +74,7 @@ class Problem:
             self.transition_model[str(self.initial_state)]["x"],
             self.transition_model[str(self.initial_state)]["y"],
         )
-        min_distance = float('inf')
+        min_distance = float("inf")
         goal_hospital = None
         for hospital, info in self.hospital_info.items():
             if (
@@ -87,7 +87,9 @@ class Problem:
                 if distance < min_distance:
                     min_distance = distance
                     goal_hospital_info = info
-        return ox.distance.nearest_nodes(graph, goal_hospital_info['x'], goal_hospital_info['y'], return_dist=False)
+        return ox.distance.nearest_nodes(
+            graph, goal_hospital_info["x"], goal_hospital_info["y"], return_dist=False
+        )
 
     def heuristic(self, state):
         """Straight Line Distance heuristic"""
@@ -102,8 +104,9 @@ class Problem:
             self.transition_model[str(goal_hospital)]["y"],
             self.transition_model[str(goal_hospital)]["x"],
         )
-    
+
     def random_successor(self, state):
         """Returns a random successor of the given state"""
         import random
+
         return random.choice(self.actions(state))

@@ -3,9 +3,33 @@
 
 ## Usage
 
-1. Install requirements `conda env create -n Algiers-HNO -f requirements.yaml`
-2. Start Flask server: `python server/src/app.py`
-3. Open a new terminal
-4. Change directory: `cd client`
-5. install node_modules: `npm install`
-6. Start Node server: `npm run dev`
+Install requirements
+
+```bash
+conda env create -m Algiers-HNO -f requirements.yaml
+conda activate Algiers-HNO
+```
+
+Start the Flask server
+
+```bash
+python server/src/app.py
+```
+
+Open a new terminal and change the directory
+
+```bash
+cd client
+```
+
+Install node_modules
+
+```bash
+npm install
+```
+
+Start the NodeJS server
+
+```bash
+npm run dev
+```

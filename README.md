@@ -8,38 +8,28 @@
 
 ## Installation
 
-**1. Create a new environment and Install the requirements**
+**Create a new environment and Install the requirements**
 
 ```bash
 conda env create -m Algiers-HNO -f requirements.yaml
-conda activate Algiers-HNO
 ```
 
-**2. Start the Flask server**
-
-```bash
-python server/src/app.py
-```
-
-**3. Open a new terminal and change the directory**
-
-```bash
-cd client
-```
-
-**4. Install node_modules**
+**Install node_modules**
 
 ```bash
 npm install
 ```
 
-**5. Start the NodeJS server**
+## Usage
+
+**Make the `run.sh` file executable, then execute it**
 
 ```bash
-npm run dev
+chmod +x run.sh
+./run.sh
 ```
 
-## Roadmap
+## ßRoadmap
 
 - We are working on providing a better user experience
 - Expanding the project to serve all states of Algeria is put into consideration

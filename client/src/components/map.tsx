@@ -48,7 +48,7 @@ const Map: React.FC<MapProps> = ({ path }) => {
 
     return (
         <div className="map w-2/3 h-[94vh]">
-            <MapContainer center={[36.7753606, 3.0601882]} zoom={13}>
+            <MapContainer center={[36.7753606, 3.0601882]} zoom={11}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

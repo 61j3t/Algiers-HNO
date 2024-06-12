@@ -62,12 +62,12 @@ class Problem:
         hospital = self.hospital_nodes[str(state)]
 
         if (
-            not (self.goal_state["type"] == self.hospital_info[hospital]["type"])
-        ) and self.goal_state["department"] not in self.hospital_info[hospital][
-            "departments"
-        ]:
-            return False
-        return True
+            self.goal_state["type"] == self.hospital_info[hospital]["type"]
+            and self.goal_state["department"]
+            in self.hospital_info[hospital]["departments"]
+        ):
+            return True
+        return False
 
     def step_cost(self, state, action):
         return self.costs[(state, action)]["length"]

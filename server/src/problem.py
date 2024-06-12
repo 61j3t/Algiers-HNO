@@ -22,6 +22,11 @@ edges = {
     eval(key): value for key, value in edges.items()
 }  # Turns keys from string into tuples
 
+hospital_nodes = {}
+
+for k, i in algiers_hospitals.items():
+    hospital_nodes[str(ox.distance.nearest_nodes(graph, i["x"], i["y"]))] = k
+
 
 class Problem:
     def __init__(
@@ -31,6 +36,7 @@ class Problem:
         transition_model=nodes,
         costs=edges,
         hospital_info=algiers_hospitals,
+        hospital_nodes=hospital_nodes,
     ):
         self.initial_state = initial_state
         self.goal_state = goal_state
@@ -38,6 +44,7 @@ class Problem:
         self.hospital_info = hospital_info
         self.costs = costs
         self.goal_hospital = self.goal_hospital()
+        self.hospital_nodes = hospital_nodes
 
     def actions(self, state):
         neighbour_nodes = self.transition_model[str(state)]["neighbors"]
@@ -49,15 +56,18 @@ class Problem:
         return action
 
     def goal_test(self, state):
-        hospital = self.transition_model[str(state)]["hospital"]
-        if hospital:
-            if (
-                self.goal_state["type"] == self.hospital_info[hospital]["type"]
-                and self.goal_state["department"]
-                in self.hospital_info[hospital]["departments"]
-            ):
-                return True
-        return False
+        if str(state) not in self.hospital_nodes.keys():
+            return False
+
+        hospital = self.hospital_nodes[str(state)]
+
+        if (
+            not (self.goal_state["type"] == self.hospital_info[hospital]["type"])
+        ) and self.goal_state["department"] not in self.hospital_info[hospital][
+            "departments"
+        ]:
+            return False
+        return True
 
     def step_cost(self, state, action):
         return self.costs[(state, action)]["length"]

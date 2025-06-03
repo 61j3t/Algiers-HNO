@@ -90,7 +90,7 @@ class Problem:
                 self.goal_state["type"] == info["type"]
                 and self.goal_state["department"] in info["departments"]
             ):
-                distance = ox.distance.euclidean(
+                distance = ox.distance.euclidean_dist_vec(
                     initial_y, initial_x, info["y"], info["x"]
                 )
                 if distance < min_distance:
@@ -107,7 +107,7 @@ class Problem:
             self.transition_model[str(state)]["x"],
             self.transition_model[str(state)]["y"],
         )
-        return ox.distance.euclidean(
+        return ox.distance.euclidean_dist_vec(
             current_y,
             current_x,
             self.transition_model[str(goal_hospital)]["y"],

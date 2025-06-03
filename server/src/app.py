@@ -41,10 +41,10 @@ def solve():
         solution_path = solver.hill_climbing_search()
     else:
         solution_path = solver.general_search(strategy=algorithm)
-        
-    print('==================================================================')
+
+    print("==================================================================")
     print(solution_path)
-    print('==================================================================')
+    print("==================================================================")
 
     path = [
         [nodes[str(node.state)]["y"], nodes[str(node.state)]["x"]]
@@ -65,4 +65,4 @@ def solve_options():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5001)

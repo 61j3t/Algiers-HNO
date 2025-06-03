@@ -104,7 +104,7 @@ const Menu: React.FC<MenuProps> = ({ onPathUpdate }) => {
         };
 
         // Send POST request to server
-        fetch("http://localhost:5000/solve", {
+        fetch("http://localhost:5001/solve", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

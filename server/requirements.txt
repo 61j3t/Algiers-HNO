@@ -1,0 +1,25 @@
+# Web Framework
+Flask==2.3.3
+flask-cors==4.0.0
+
+# Geospatial and Mapping
+osmnx==1.6.0
+networkx==3.2.1
+
+# Machine Learning (required by OSMnx)
+scikit-learn>=1.4.0
+
+# HTTP Requests and Geocoding
+requests==2.31.0
+geocoder==1.38.1
+
+# Standard library modules (included in Python)
+# json - standard library
+# collections - standard library
+# os - standard library
+# heapq - standard library
+# random - standard library
+
+# Optional: Development and testing dependencies
+# pytest==7.4.3
+# pytest-cov==4.1.0 

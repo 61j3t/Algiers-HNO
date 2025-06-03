@@ -1,4 +1,3 @@
-from turtle import distance
 from utils import load_data
 from node import Node
 import osmnx as ox

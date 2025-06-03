@@ -25,12 +25,28 @@ def solve():
     data = request.json
     print("Received data from client:", data)
 
-    location = data.get("location")
+    # Handle both old format (location) and new format (latitude/longitude)
+    if "latitude" in data and "longitude" in data:
+        # New format: coordinates sent directly
+        Y = data.get("latitude")
+        X = data.get("longitude")
+    elif "location" in data:
+        # Old format: location name to be geocoded (for backward compatibility)
+        location = data.get("location")
+        Y, X = ox.geocoder.geocode(location)
+    else:
+        return (
+            jsonify(
+                {
+                    "error": "Either 'location' or 'latitude'/'longitude' must be provided"
+                }
+            ),
+            400,
+        )
+
     algorithm = data.get("algorithm")
     type = data.get("type")
     department = data.get("department")
-
-    Y, X = ox.geocoder.geocode(location)
 
     initial_state = ox.distance.nearest_nodes(graph, X, Y, return_dist=False)
     goal_state = {"type": type, "department": department}

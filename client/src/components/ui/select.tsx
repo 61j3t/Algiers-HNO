@@ -17,9 +17,10 @@ const CustomSelect: React.FC<Props> = ({ items, default_item, placeholder, value
       selectedKeys={[value]}
       onSelectionChange={(keys) => onChange(Array.from(keys)[0] as string)}
       defaultSelectedKeys={[default_item]}
+      className="text-black bg-white"
     >
       {items.map((item) => (
-        <SelectItem key={item} value={item}>
+        <SelectItem key={item} value={item} className="text-black bg-white">
           {item}
         </SelectItem>
       ))}

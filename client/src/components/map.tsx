@@ -27,20 +27,55 @@ const otherCustomIcon = L.icon({
 
 interface MapProps {
     path: [number, number][];
+    onLocationClick?: (locationData: { coordinates: { lat: number; lng: number }, locationName: string }) => void;
 }
 
-const Map: React.FC<MapProps> = ({ path }) => {
+const Map: React.FC<MapProps> = ({ path, onLocationClick }) => {
     const [clickedMarker, setClickedMarker] = useState<{
         lat: number;
         lng: number;
     } | null>(null);
 
+    // Function to get location name from coordinates using reverse geocoding
+    const getLocationName = async (lat: number, lng: number): Promise<string> => {
+        try {
+            const response = await fetch(
+                `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`
+            );
+            const data = await response.json();
+
+            if (data && data.display_name) {
+                // Return a shortened version of the address
+                const addressParts = data.display_name.split(',');
+                // Take first 2-3 parts for a cleaner display
+                return addressParts.slice(0, 3).join(', ').trim();
+            } else {
+                return `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+            }
+        } catch (error) {
+            console.error('Error fetching location name:', error);
+            return `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+        }
+    };
+
     // Custom hook to handle click event
     function AddMarkerOnClick() {
         useMapEvents({
-            click(e) {
+            async click(e) {
                 const { lat, lng } = e.latlng;
-                setClickedMarker({ lat, lng });
+                const coordinates = { lat, lng };
+                setClickedMarker(coordinates);
+
+                // Get location name from coordinates
+                const locationName = await getLocationName(lat, lng);
+
+                // Notify parent component about the clicked location
+                if (onLocationClick) {
+                    onLocationClick({
+                        coordinates,
+                        locationName
+                    });
+                }
             },
         });
         return null;

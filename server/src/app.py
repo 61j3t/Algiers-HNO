@@ -4,12 +4,13 @@ from flask_cors import CORS
 from utils import get_current_location_coordinates
 from problem import Problem
 from solver import Solver
+from constants import BACKEND_PORT, ALLOWED_ORIGINS
 import os
 import osmnx as ox
 from problem import nodes
 
 app = Flask(__name__)
-CORS(app)  # Allow CORS for all routes
+CORS(app, origins=ALLOWED_ORIGINS)  # Allow CORS for specific origins
 
 
 @app.route("/solve", methods=["POST"])
@@ -81,4 +82,4 @@ def solve_options():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5001)
+    app.run(debug=True, port=BACKEND_PORT)

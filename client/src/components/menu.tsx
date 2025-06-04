@@ -3,6 +3,7 @@ import Select from "@/components/ui/select";
 import Button from "@/components/ui/button";
 import { Input } from "@nextui-org/input";
 import { useState } from "react";
+import { API_ENDPOINTS } from "@/constants/config";
 
 interface MenuProps {
     onPathUpdate: (newPath: [number, number][]) => void;
@@ -115,7 +116,7 @@ const Menu: React.FC<MenuProps> = ({ onPathUpdate, clickedLocation }) => {
         };
 
         // Send POST request to server
-        fetch("http://localhost:5001/solve", {
+        fetch(API_ENDPOINTS.SOLVE, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
